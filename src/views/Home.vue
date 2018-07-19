@@ -2,7 +2,6 @@
 
 <template>
   <div id="home" class="box">
-    <LinkBar id="linkbar" class="row header"/>
     <Info id="info" class="row content"/>
     <div id="terminal_div" class="row content">
       <Terminal id="terminal"/>
@@ -13,13 +12,11 @@
 
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator';
-  import LinkBar from '@/components/LinkBar.vue';
   import Info from '@/components/Info.vue';
   import Terminal from '@/components/Terminal.vue';
 
   @Component({
     components: {
-      LinkBar,
       Info,
       Terminal,
     },
@@ -44,9 +41,4 @@
     overflow: auto;
     height: 100%;
   }
-
-  #linkbar {
-    height: 100px;
-  }
-
 </style>
