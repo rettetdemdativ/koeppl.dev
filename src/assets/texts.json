@@ -9,18 +9,18 @@
         " Austria.\n"
     ],
     "help": [
-        "You can use the following commands",
-        "\n\tabout         -- personal information about me",
+        "You can use the following commands:",
+        "\n\tabout          personal information about me",
+        "\n\thelp           a help text",
+        "\n\tclear          clear the console",
         "\n\tgithub",
-        "\n\t\tshow  -- opens my GitHub page",
-        "\n\t\tinfo  -- prints info from my GitHub page",
-        "\n\tstackoverflow -- StackOverflow profile info",
-        "\n\t\tshow  -- opens my GitHub page",
-        "\n\t\tinfo  -- prints info from my GitHub page",
-        "\n\ttwitter       -- Show Twitter profile info",
-        "\n\t\tshow  -- opens my GitHub page",
-        "\n\t\tinfo  -- prints info from my GitHub page",
-        "\n\thelp          -- a help text",
-        "\n\tclear         -- clear the console"
+        "\n\t\tshow\topens my GitHub page",
+        "\n\t\tinfo\tprints info from my GitHub page",
+        "\n\tstackoverflow",
+        "\n\t\tshow\topens my GitHub page",
+        "\n\t\tinfo\tprints info from my GitHub page",
+        "\n\ttwitter",
+        "\n\t\tshow\topens my GitHub page",
+        "\n\t\tinfo\tprints info from my GitHub page"
     ]
 }
