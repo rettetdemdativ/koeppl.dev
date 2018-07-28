@@ -31,7 +31,7 @@
 
         onEnter(e: Event): void {
             var input = (<HTMLInputElement>document.getElementById("term_input"))
-            var command = this.getCurrentLine(input).substr(this.prompt.length);
+            var command = this.getCurrentLine(input).substr(this.prompt.length).trimRight();
             this.handleCommand(command, input);
             e.preventDefault();
         }
