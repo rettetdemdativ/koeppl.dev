@@ -10,7 +10,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "v-tooltip": "^2.0.0-rc.33",
-    "vue": "^2.5.16",
+    "vue": "^2.5.17",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^7.0.0",
     "vue-router": "^3.0.1",
@@ -22,6 +22,6 @@
     "@vue/cli-service": "^3.0.0-rc.5",
     "node-sass": "^4.9.2",
     "sass-loader": "^7.0.1",
-    "vue-template-compiler": "^2.5.16"
+    "vue-template-compiler": "^2.5.17"
   }
 }
