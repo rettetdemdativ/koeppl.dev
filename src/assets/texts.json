@@ -17,10 +17,10 @@
         "\n\t\tshow\topens my GitHub page",
         "\n\t\tinfo\tprints info from my GitHub page",
         "\n\tstackoverflow",
-        "\n\t\tshow\topens my GitHub page",
-        "\n\t\tinfo\tprints info from my GitHub page",
+        "\n\t\tshow\topens my Stackoverflow page",
+        "\n\t\tinfo\tprints info from my Stackoverflow profile",
         "\n\ttwitter",
-        "\n\t\tshow\topens my GitHub page",
-        "\n\t\tinfo\tprints info from my GitHub page"
+        "\n\t\tshow\topens my Twitter page",
+        "\n\t\tinfo\tprints info from my Twitter"
     ]
 }
