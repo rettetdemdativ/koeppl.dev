@@ -45,7 +45,6 @@
     }
 
     h3 {
-        font-family: 'Roboto Light';
         color: darkgrey;
         margin-top: 0;
     }
