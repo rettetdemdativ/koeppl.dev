@@ -15,15 +15,16 @@
     "vue-property-decorator": "^7.0.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
-    "url-parse": "^1.4.3"
+    "url-parse": "^1.4.3",
+    "lodash": ">=4.17.11"
   },
   "devDependencies": {
-    "webpack-dev-server": ">=3.1.11",
-    "@vue/cli-plugin-babel": "^3.0.0-rc.5",
-    "@vue/cli-plugin-typescript": "^3.0.0-rc.5",
-    "@vue/cli-service": "^3.0.0-rc.5",
+    "@vue/cli-plugin-babel": "^3.5.5",
+    "@vue/cli-plugin-typescript": "^3.5.3",
+    "@vue/cli-service": "^3.5.3",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.0.1",
-    "vue-template-compiler": "^2.5.17"
+    "vue-template-compiler": "^2.5.17",
+    "webpack-dev-server": ">=3.1.11"
   }
 }
