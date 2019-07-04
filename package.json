@@ -15,7 +15,9 @@
     "vue-property-decorator": "^7.0.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
-    "url-parse": "^1.4.3"
+    "url-parse": "^1.4.3",
+    "lodash": ">=4.17.11",
+    "extend": ">=3.0.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.9.0",
