@@ -26,7 +26,7 @@ const links = require('../assets/links.json');
 @Component
 export default class Terminal extends Vue {
   private readonly prompt = 'guest@calmandniceperson.com:~';
-  private tooltip: string = 'Type \'help\' to see what you can do';
+  private tooltip: string = "Type 'help' to see what you can do";
   private termText: string;
   constructor() {
     super();
@@ -144,11 +144,11 @@ export default class Terminal extends Vue {
     const api = new GitHubApi();
     api.getGitHubRepos((repos: any[]) => {
       input.value += `\nList of repositories:`;
-      for (let key in repos) {
-        input.value += `\n${repos[key].name}\n\
-                    \tDescription: ${repos[key].description}\n\
-                    \tStargazers: ${repos[key].stargazers_count}`;
-      }
+      repos.forEach((repo: any) => {
+        input.value += `\n${repo.name}\n\
+                    \tDescription: ${repo.description}\n\
+                    \tStargazers: ${repo.stargazers_count}`;
+      });
       this.putPrompt(input);
       input.scrollTop = input.scrollHeight;
     });
@@ -173,7 +173,7 @@ export default class Terminal extends Vue {
 </script>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css?family=Inconsolata");
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
 
 #terminal {
   height: 100%;
@@ -194,7 +194,7 @@ export default class Terminal extends Vue {
   overflow: auto;
   background: black;
   color: white;
-  font-family: "Inconsolata", sans-serif;
+  font-family: 'Inconsolata', sans-serif;
   font-size: 12pt;
   border-width: 0px;
   padding: 10px;
@@ -207,19 +207,19 @@ export default class Terminal extends Vue {
   .tooltip-inner {
     background: lightgray;
     color: black;
-    font-family: "Inconsolata", sans-serif;
+    font-family: 'Inconsolata', sans-serif;
     font-size: 10pt;
     border-radius: 16px;
     padding: 5px 10px 4px;
   }
 
-  &[aria-hidden="true"] {
+  &[aria-hidden='true'] {
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.15s, visibility 0.15s;
   }
 
-  &[aria-hidden="false"] {
+  &[aria-hidden='false'] {
     visibility: visible;
     opacity: 1;
     transition: opacity 0.15s;
