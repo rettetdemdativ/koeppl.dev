@@ -17,65 +17,85 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import GitHubApi from "../github_api";
-import { StackExchangeApi, StackExchangeUser } from "../stackexchange_api";
-var texts = require("../assets/texts.json");
-var links = require("../assets/links.json");
+import { Component, Vue } from 'vue-property-decorator';
+import GitHubApi from '../github_api';
+import { StackExchangeApi, StackExchangeUser } from '../stackexchange_api';
+const texts = require('../assets/texts.json');
+const links = require('../assets/links.json');
 
 @Component
 export default class Terminal extends Vue {
-  private readonly prompt = "guest@calmandniceperson.com:~";
-  private tooltip: string = "Type 'help' to see what you can do";
+  private readonly prompt = 'guest@calmandniceperson.com:~';
+  private tooltip: string = 'Type \'help\' to see what you can do';
   private termText: string;
   constructor() {
     super();
     this.termText = this.prompt;
   }
 
-  onEnter(e: Event): void {
-    var input = <HTMLInputElement>document.getElementById("term_input");
-    var command = this.getCurrentLine(input)
+  public mounted() {
+    this.movePointerBehindPrompt();
+  }
+
+  public onEnter(e: Event): void {
+    const input = document.getElementById('term_input') as HTMLInputElement;
+    const command = this.getCurrentLine(input)
       .substr(this.prompt.length)
       .trimRight();
     this.handleCommand(command, input);
     e.preventDefault();
   }
 
+  public onDelete(e: Event): void {
+    const input = document.getElementById('term_input') as HTMLInputElement;
+    const currentLine = this.getCurrentLine(input);
+    // If removing the next symbol would mean that we have less than
+    // the length of the prompt on the line (which would mean that our
+    // prompt wouldn't show), we don't allow the user to delete the
+    // rest.
+    if (
+      currentLine.substr(0, currentLine.length - 1).length >= this.prompt.length
+    ) {
+      input.value = input.value.substr(0, input.value.length);
+    } else {
+      e.preventDefault();
+    }
+  }
+
   private handleCommand(command: string, input: HTMLInputElement): void {
     if (texts[command]) {
       // If we reached a text command, we simply print the text from
       // the JSON.
-      input.value += `\n${texts[command].join("")}\n${this.prompt}`;
+      input.value += `\n${texts[command].join('')}\n${this.prompt}`;
     } else {
       // Since this command might have two parts, we split it.
       // Can't hurt to do that since we're gonna have a first part
       // of the command anyway.
-      var superCommand = command.split(" ")[0];
+      const superCommand = command.split(' ')[0];
       if (
-        Object.keys(links).some(
-          (key): boolean => {
-            // Check if there is a key that partially matches. If that's
-            // the case, we know that the key either matches completely
-            // or there is a subcommand attached which we can read out
-            // later.
-            return superCommand === key;
-          }
-        )
+        Object.keys(links).some((key): boolean => {
+          // Check if there is a key that partially matches. If that's
+          // the case, we know that the key either matches completely
+          // or there is a subcommand attached which we can read out
+          // later.
+          return superCommand === key;
+        })
       ) {
-        var subCommand = command.split(" ")[1];
+        const subCommand = command.split(' ')[1];
         // If the subcommand is 'show', we open the respective
         // web pages. Otherwise we default to printing out the info.
-        if (subCommand === "show") {
-          var win = window.open(links[superCommand], "_blank");
-          if (win) win.focus();
-        } else if (subCommand === "info" || !subCommand) {
+        if (subCommand === 'show') {
+          const win = window.open(links[superCommand], '_blank');
+          if (win) {
+            win.focus();
+          }
+        } else if (subCommand === 'info' || !subCommand) {
           this.printInfo(superCommand, input);
         }
         this.putPrompt(input);
-      } else if (command === "clear") {
+      } else if (command === 'clear') {
         input.value = this.prompt;
-      } else if (command === "") {
+      } else if (command === '') {
         this.putPrompt(input);
       } else {
         input.value += `\n${texts.invalid}\n${this.prompt}`;
@@ -91,56 +111,40 @@ export default class Terminal extends Vue {
     input.value += `\n${this.prompt}`;
   }
 
-  onDelete(e: Event): void {
-    var input = <HTMLInputElement>document.getElementById("term_input");
-    var currentLine = this.getCurrentLine(input);
-    // If removing the next symbol would mean that we have less than
-    // the length of the prompt on the line (which would mean that our
-    // prompt wouldn't show), we don't allow the user to delete the
-    // rest.
-    if (
-      currentLine.substr(0, currentLine.length - 1).length >= this.prompt.length
-    ) {
-      input.value = input.value.substr(0, input.value.length);
-    } else {
-      e.preventDefault();
-    }
-  }
-
   // Splits the text currently contained in the textarea at every endline
   // and returns the last element of the resulting array as the current
   // line.
   private getCurrentLine(input: HTMLInputElement): string {
-    var lines = input.value.split("\n");
+    const lines = input.value.split('\n');
     return lines[lines.length - 1];
   }
 
   // Move pointer to the end of the prompt by setting the selection area.
   private movePointerBehindPrompt() {
-    var input = <HTMLInputElement>document.getElementById("term_input");
+    const input = document.getElementById('term_input') as HTMLInputElement;
     input.selectionStart = this.prompt.length;
     input.selectionEnd = this.prompt.length;
   }
 
   private printInfo(superCommand: string, input: HTMLInputElement) {
     switch (superCommand) {
-      case "github":
+      case 'github':
         this.printGitHubInfo(input);
         break;
-      case "stackoverflow":
+      case 'stackoverflow':
         this.printStackOverflowInfo(input);
         break;
-      case "twitter":
+      case 'twitter':
         input.value += `\n${links[superCommand]}`;
         break;
     }
   }
 
   private printGitHubInfo(input: HTMLInputElement) {
-    var api = new GitHubApi();
+    const api = new GitHubApi();
     api.getGitHubRepos((repos: any[]) => {
       input.value += `\nList of repositories:`;
-      for (var key in repos) {
+      for (let key in repos) {
         input.value += `\n${repos[key].name}\n\
                     \tDescription: ${repos[key].description}\n\
                     \tStargazers: ${repos[key].stargazers_count}`;
@@ -151,7 +155,7 @@ export default class Terminal extends Vue {
   }
 
   private printStackOverflowInfo(input: HTMLInputElement) {
-    var api = new StackExchangeApi();
+    const api = new StackExchangeApi();
     api.getInfo((user: StackExchangeUser) => {
       input.value += `\nMy StackOverflow profile:\n\
                 \tUsername:      ${user.displayName}\n\
@@ -164,10 +168,6 @@ export default class Terminal extends Vue {
       this.putPrompt(input);
       input.scrollTop = input.scrollHeight;
     });
-  }
-
-  mounted() {
-    this.movePointerBehindPrompt();
   }
 }
 </script>
