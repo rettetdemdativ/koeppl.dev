@@ -9,15 +9,18 @@
   },
   "dependencies": {
     "axios": "^0.18.1",
+    "extend": ">=3.0.2",
+    "lodash": ">=4.17.13",
+    "lodash.merge": ">=4.6.2",
+    "lodash.defaultsdeep": ">=4.6.1",
+    "typescript": "^3.5.3",
+    "url-parse": "^1.4.3",
     "v-tooltip": "^2.0.0-rc.33",
     "vue": "^2.5.17",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^7.0.0",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1",
-    "url-parse": "^1.4.3",
-    "lodash": ">=4.17.11",
-    "extend": ">=3.0.2"
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.9.0",
