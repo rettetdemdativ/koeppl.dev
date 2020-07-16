@@ -10,7 +10,7 @@
   "dependencies": {
     "axios": "^0.18.1",
     "extend": ">=3.0.2",
-    "lodash": ">=4.17.13",
+    "lodash": ">=4.17.19",
     "lodash.merge": ">=4.6.2",
     "lodash.defaultsdeep": ">=4.6.1",
     "typescript": "^3.5.3",
