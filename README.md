@@ -1,4 +1,4 @@
-# calmandniceperson.com
+# koeppl.dev
 
 ## Project setup
 ```

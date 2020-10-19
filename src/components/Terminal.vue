@@ -25,7 +25,7 @@ const links = require('../assets/links.json');
 
 @Component
 export default class Terminal extends Vue {
-  private readonly prompt = 'guest@calmandniceperson.com:~';
+  private readonly prompt = 'guest@koeppl.dev:~';
   private tooltip: string = "Type 'help' to see what you can do";
   private termText: string;
   constructor() {

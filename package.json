@@ -1,5 +1,5 @@
 {
-  "name": "calmandniceperson.com",
+  "name": "koeppl.dev",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,28 +10,28 @@
   "dependencies": {
     "axios": "^0.18.1",
     "extend": ">=3.0.2",
-    "lodash": ">=4.17.13",
-    "lodash.merge": ">=4.6.2",
+    "lodash": "^4.17.20",
     "lodash.defaultsdeep": ">=4.6.1",
-    "typescript": "^3.5.3",
-    "url-parse": "^1.4.3",
-    "v-tooltip": "^2.0.0-rc.33",
-    "vue": "^2.5.17",
-    "vue-class-component": "^6.0.0",
-    "vue-property-decorator": "^7.0.0",
-    "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "lodash.merge": ">=4.6.2",
+    "typescript": "^3.9.7",
+    "url-parse": "^1.4.7",
+    "v-tooltip": "2.0.0",
+    "vue": "^2.6.12",
+    "vue-class-component": "^6.3.2",
+    "vue-property-decorator": "^7.3.0",
+    "vue-router": "^3.4.7",
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.9.0",
-    "@vue/cli-plugin-typescript": "^3.9.0",
-    "@vue/cli-service": "^3.9.0",
+    "@vue/cli-plugin-babel": "^3.12.1",
+    "@vue/cli-plugin-typescript": "^3.12.1",
+    "@vue/cli-service": "^4.5.8",
     "fstream": "^1.0.12",
-    "node-sass": "^4.12.0",
-    "sass-loader": "^7.0.1",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^7.3.1",
     "tar": "^2.2.2",
-    "vue-template-compiler": "^2.5.17",
-    "webpack-bundle-analyzer": "^3.3.2",
-    "webpack-dev-server": "^3.7.2"
+    "vue-template-compiler": "^2.6.12",
+    "webpack-bundle-analyzer": "^3.9.0",
+    "webpack-dev-server": "^3.11.0"
   }
 }
