@@ -31,4 +31,5 @@ jobs:
           folder: dist
           token: ${{ secrets.PAT }}
           repository-name: rettetdemdativ/rettetdemdativ.github.io
+          branch: master
 
