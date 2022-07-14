@@ -29,4 +29,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.3.4
         with:
           folder: dist
+          token: ${{ secrets.PAT }}
+          repository-name: rettetdemdativ/rettetdemdativ.github.io
 
