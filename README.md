@@ -1,5 +1,7 @@
 # koeppl.dev
 
+[![CI](https://github.com/rettetdemdativ/koeppl.dev/actions/workflows/main.yml/badge.svg)](https://github.com/rettetdemdativ/koeppl.dev/actions/workflows/main.yml)
+
 ## Project setup
 ```
 npm install
