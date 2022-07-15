@@ -67,7 +67,6 @@
    * Handles the various commands that can be entered into the CLI and puts the
    * cursor in the correct place afterwards.
    * @param command The command that is to be executed
-   * @param input The input field the results are written to
    */
   function handleCommand(command: string): void {
     if (COMMAND_TEXTS[command]) {
@@ -114,7 +113,6 @@
 
   /**
    * Puts a newline and a prompt. Basically starts a new line in the terminal.
-   * @param input
    */
   function putPrompt(): void {
     termText += `\n${prompt}`;
@@ -123,7 +121,6 @@
   /**
    * Splits the text currently contained in the textarea at every endline and
    * returns the last element of the resulting array as the current line.
-   * @param input
    */
   function getCurrentLine(): string {
     const lines = termText.split('\n');
@@ -142,7 +139,6 @@
    * Handles the 'info' subcommand. The function distinguishes between the
    * different super commands and reacts accordingly by printing their info.
    * @param superCommand
-   * @param input
    */
   function printInfo(superCommand: string) {
     switch (superCommand) {
@@ -161,7 +157,6 @@
 
   /**
    * Prints info from GitHub (repos, etc.).
-   * @param input The input field to print to
    */
   async function printGitHubInfo(): Promise<void> {
     const api = new GitHubApi();
