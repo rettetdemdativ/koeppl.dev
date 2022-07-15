@@ -20,11 +20,18 @@ npm run prepare
 npm run dev
 ```
 
-### Compiles and minifies for production
+### Build for development
 
 ```
 npm run prepare
 npm run build
+```
+
+### Compiles and minifies for production
+
+```
+npm run prepare
+npm run build-prod
 ```
 
 ### Lints and fixes files
