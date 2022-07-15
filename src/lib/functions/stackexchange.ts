@@ -1,67 +1,41 @@
 import axios, { type AxiosResponse } from 'axios';
 
-export class StackExchangeUser {
-  public displayName: string;
-  public badgeCountGold: number;
-  public badgeCountSilver: number;
-  public badgeCountBronze: number;
-  public questionCount: number;
-  public answerCount: number;
-
-  constructor(
-    displayName: string,
-    badgeCountGold: number,
-    badgeCountSilver: number,
-    badgeCountBronze: number,
-    questionCount: number,
-    answerCount: number
-  ) {
-    this.displayName = displayName;
-    this.badgeCountGold = badgeCountGold;
-    this.badgeCountSilver = badgeCountSilver;
-    this.badgeCountBronze = badgeCountBronze;
-    this.questionCount = questionCount;
-    this.answerCount = answerCount;
-  }
-}
-
 // tslint:disable-next-line:max-classes-per-file
-export class StackExchangeApi {
-  public getInfo(c: (user: StackExchangeUser) => void) {
-    let user: any = null;
+export default class StackExchangeApi {
+  public async getInfoAsString(): Promise<string> {
+    const [userResp, questionsResp, answersResp] = await Promise.all([
+      this.getUser(),
+      this.getQuestionCount(),
+      this.getAnswerCount()
+    ]);
 
-    axios.all([this.getUser(), this.getQuestionCount(), this.getAnswerCount()]).then(
-      axios.spread((userResp, questionResp, answerResp) => {
-        user = new StackExchangeUser(
-          userResp.data.items[0].display_name,
-          userResp.data.items[0].badge_counts.gold,
-          userResp.data.items[0].badge_counts.silver,
-          userResp.data.items[0].badge_counts.bronze,
-          questionResp.data.items.length,
-          answerResp.data.items.length
-        );
-        c(user);
-      })
-    );
+    return `\nMy StackOverflow profile:\n\
+                \tUsername: ${userResp.data.items[0].display_name}\n\
+                \tNo. of badges:\n\
+                \t\tGold: ${userResp.data.items[0].badge_counts.gold}\n\
+                \t\tSilver: ${userResp.data.items[0].badge_counts.silver}\n\
+                \t\tBronze: ${userResp.data.items[0].badge_counts.bronze}\n\
+                \tNo. of questions asked: ${questionsResp.data.items.length}\n\
+                \tNo. of answers given: ${answersResp.data.items.length}`
   }
 
-  private getUser(): Promise<AxiosResponse<any, any>> {
+  private async getUser(): Promise<AxiosResponse<any, any>> {
     // tslint:disable-next-line:max-line-length
-    return axios.get(
+    return await axios.get(
       'https://api.stackexchange.com/2.2/users/2593209?order=desc&sort=reputation&site=stackoverflow'
     );
   }
 
-  private getQuestionCount(): Promise<AxiosResponse<any, any>> {
+  private async getQuestionCount(): Promise<AxiosResponse<any, any>> {
     // tslint:disable-next-line:max-line-length
-    return axios.get(
+    return await axios.get(
       'https://api.stackexchange.com/2.2/users/2593209/questions?order=desc&sort=activity&site=stackoverflow'
     );
   }
 
-  private getAnswerCount(): Promise<AxiosResponse<any, any>> {
+  private async getAnswerCount(): Promise<AxiosResponse<any, any>> {
     // tslint:disable-next-line:max-line-length
-    return axios.get(
+    return await axios.get(
       'https://api.stackexchange.com/2.2/users/2593209/answers?order=desc&sort=activity&site=stackoverflow'
     );
   }

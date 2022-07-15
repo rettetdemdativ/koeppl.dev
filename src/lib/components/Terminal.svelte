@@ -2,11 +2,11 @@
   import { afterUpdate, onMount } from 'svelte';
   import Tooltip, { Wrapper } from '@smui/tooltip';
   import GitHubApi from '../functions/github';
-  import { StackExchangeApi, StackExchangeUser } from '../functions/stackexchange';
+  import StackExchangeApi from '../functions/stackexchange';
   import { COMMAND_TEXTS } from '../constants/texts';
   import { LINKS } from '../constants/links';
 
-  let terminalTextArea: HTMLTextAreaElement
+  let terminalTextArea: HTMLTextAreaElement;
   let toolTip = "Type 'help' to see what you can do";
   let prompt = 'guest@koeppl.dev:~ ';
   let termText = '';
@@ -165,24 +165,17 @@
    */
   async function printGitHubInfo(): Promise<void> {
     const api = new GitHubApi();
-    termText += await api.getGitHubReposAsString()
+    termText += await api.getGitHubReposAsString();
     putPrompt();
   }
 
-  function printStackOverflowInfo() {
+  /**
+   * Prints info from StackOverflow.
+   */
+  async function printStackOverflowInfo() {
     const api = new StackExchangeApi();
-    api.getInfo((user: StackExchangeUser) => {
-      termText += `\nMy StackOverflow profile:\n\
-                \tUsername:      ${user.displayName}\n\
-                \tNo. of badges:\n\
-                \t\tGold: ${user.badgeCountGold}\n\
-                \t\tSilver: ${user.badgeCountSilver}\n\
-                \t\tBronze: ${user.badgeCountBronze}\n\
-                \tNo. of questions asked: ${user.questionCount}\n\
-                \tNo. of answers given: ${user.answerCount}`;
-      putPrompt();
-      terminalTextArea.scrollTop = terminalTextArea.scrollHeight;
-    });
+    termText += await api.getInfoAsString();
+    putPrompt();
   }
 </script>
 
