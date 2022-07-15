@@ -6,6 +6,7 @@
   import { COMMAND_TEXTS } from '../constants/texts';
   import { LINKS } from '../constants/links';
 
+  let terminalTextArea: HTMLTextAreaElement
   let toolTip = "Type 'help' to see what you can do";
   let prompt = 'guest@koeppl.dev:~ ';
   let termText = '';
@@ -18,8 +19,7 @@
   afterUpdate(() => {
     // After DOM is in sync with data, the textarea is scrolled to the bottom
     // as we land here after the input text has been updated.
-    let input = document.getElementById('term_input') as HTMLInputElement;
-    input.scrollTop = input.scrollHeight;
+    terminalTextArea.scrollTop = terminalTextArea.scrollHeight;
   });
 
   /**
@@ -40,9 +40,8 @@
    * @param e The KeyboardEvent instance that was emitted
    */
   function handleEnter(e: KeyboardEvent): void {
-    const input = document.getElementById('term_input') as HTMLInputElement;
-    const command = getCurrentLine(input).substr(prompt.length).trimRight();
-    handleCommand(command, input);
+    const command = getCurrentLine().substr(prompt.length).trimRight();
+    handleCommand(command);
     e.preventDefault();
   }
 
@@ -52,8 +51,7 @@
    * @param e The KeyboardEvent instance that was emitted
    */
   function handleBackspace(e: KeyboardEvent): void {
-    const input = document.getElementById('term_input') as HTMLInputElement;
-    const currentLine = getCurrentLine(input);
+    const currentLine = getCurrentLine();
     // If removing the next symbol would mean that we have less than
     // the length of the prompt on the line (which would mean that our
     // prompt wouldn't show), we don't allow the user to delete the
@@ -71,7 +69,7 @@
    * @param command The command that is to be executed
    * @param input The input field the results are written to
    */
-  function handleCommand(command: string, input: HTMLInputElement): void {
+  function handleCommand(command: string): void {
     if (COMMAND_TEXTS[command]) {
       // If we reached a text command, we simply print the text from
       // the JSON.
@@ -99,18 +97,18 @@
             win.focus();
           }
         } else if (subCommand === 'info' || !subCommand) {
-          printInfo(superCommand, input);
+          printInfo(superCommand);
         }
-        putPrompt(input);
+        putPrompt();
       } else if (command === 'clear') {
         termText = prompt;
       } else if (command === '') {
-        putPrompt(input);
+        putPrompt();
       } else {
         termText += `\n${COMMAND_TEXTS.invalid}\n${prompt}`;
       }
       // Scroll to bottom
-      input.scrollTop = input.scrollHeight;
+      terminalTextArea.scrollTop = terminalTextArea.scrollHeight;
     }
   }
 
@@ -118,7 +116,7 @@
    * Puts a newline and a prompt. Basically starts a new line in the terminal.
    * @param input
    */
-  function putPrompt(input: HTMLInputElement): void {
+  function putPrompt(): void {
     termText += `\n${prompt}`;
   }
 
@@ -127,7 +125,7 @@
    * returns the last element of the resulting array as the current line.
    * @param input
    */
-  function getCurrentLine(input: HTMLInputElement): string {
+  function getCurrentLine(): string {
     const lines = termText.split('\n');
     return lines[lines.length - 1];
   }
@@ -136,9 +134,8 @@
    * Move pointer to the end of the prompt by setting the selection area.
    */
   function movePointerBehindPrompt(): void {
-    const input = document.getElementById('term_input') as HTMLInputElement;
-    input.selectionStart = prompt.length;
-    input.selectionEnd = prompt.length;
+    terminalTextArea.selectionStart = prompt.length;
+    terminalTextArea.selectionEnd = prompt.length;
   }
 
   /**
@@ -147,13 +144,13 @@
    * @param superCommand
    * @param input
    */
-  function printInfo(superCommand: string, input: HTMLInputElement) {
+  function printInfo(superCommand: string) {
     switch (superCommand) {
       case 'github':
-        printGitHubInfo(input);
+        printGitHubInfo();
         break;
       case 'stackoverflow':
-        printStackOverflowInfo(input);
+        printStackOverflowInfo();
         break;
       case 'mastodon':
       case 'twitter':
@@ -166,7 +163,7 @@
    * Prints info from GitHub (repos, etc.).
    * @param input The input field to print to
    */
-  function printGitHubInfo(input: HTMLInputElement): void {
+  function printGitHubInfo(): void {
     const api = new GitHubApi();
     api.getGitHubRepos((repos: any[]) => {
       termText += `\nList of repositories:`;
@@ -175,11 +172,11 @@
                     \tDescription: ${repo.description}\n\
                     \tStargazers: ${repo.stargazers_count}`;
       });
-      putPrompt(input);
+      putPrompt();
     });
   }
 
-  function printStackOverflowInfo(input: HTMLInputElement) {
+  function printStackOverflowInfo() {
     const api = new StackExchangeApi();
     api.getInfo((user: StackExchangeUser) => {
       termText += `\nMy StackOverflow profile:\n\
@@ -190,8 +187,8 @@
                 \t\tBronze: ${user.badgeCountBronze}\n\
                 \tNo. of questions asked: ${user.questionCount}\n\
                 \tNo. of answers given: ${user.answerCount}`;
-      putPrompt(input);
-      input.scrollTop = input.scrollHeight;
+      putPrompt();
+      terminalTextArea.scrollTop = terminalTextArea.scrollHeight;
     });
   }
 </script>
@@ -200,6 +197,7 @@
   <Wrapper>
     <textarea
       id="term_input"
+      bind:this={terminalTextArea}
       bind:value={termText}
       on:keydown={handleTextAreaKeyDown}
       spellcheck="false"
