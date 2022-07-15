@@ -4,8 +4,8 @@ import { sveltekit } from '@sveltejs/kit/vite';
 const config = {
   plugins: [sveltekit()],
   ssr: {
-    noExternal: [/^@smui(?:-extra)?\//],
-  },
+    noExternal: [/^@smui(?:-extra)?\//]
+  }
 };
 
 export default config;
