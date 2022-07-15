@@ -25,11 +25,8 @@ const config = {
 
   // GitHub Pages specific stuff
   paths: {
-    base: dev ? '' : '/rettetdemdativ.github.io',
-  },
-  // If you are not using a .nojekyll file, change your appDir to something not starting with an underscore.
-  // For example, instead of '_app', use 'app_', 'internal', etc.
-  appDir: 'internal',
+    base: dev ? '' : '/rettetdemdativ.github.io'
+  }
 };
 
 export default config;
