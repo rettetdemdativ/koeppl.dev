@@ -163,17 +163,10 @@
    * Prints info from GitHub (repos, etc.).
    * @param input The input field to print to
    */
-  function printGitHubInfo(): void {
+  async function printGitHubInfo(): Promise<void> {
     const api = new GitHubApi();
-    api.getGitHubRepos((repos: any[]) => {
-      termText += `\nList of repositories:`;
-      repos.forEach((repo: any) => {
-        termText += `\n${repo.name}\n\
-                    \tDescription: ${repo.description}\n\
-                    \tStargazers: ${repo.stargazers_count}`;
-      });
-      putPrompt();
-    });
+    termText += await api.getGitHubReposAsString()
+    putPrompt();
   }
 
   function printStackOverflowInfo() {
