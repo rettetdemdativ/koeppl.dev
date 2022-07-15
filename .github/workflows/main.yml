@@ -28,7 +28,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.3.4
         with:
-          folder: dist
+          folder: build
           token: ${{ secrets.PAT }}
           repository-name: rettetdemdativ/rettetdemdativ.github.io
           branch: master
