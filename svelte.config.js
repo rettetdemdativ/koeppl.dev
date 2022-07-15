@@ -20,14 +20,14 @@ const config = {
     prerender: {
       // This can be false if you're using a fallback (i.e. SPA mode)
       default: true
-    }
-  },
+    },
 
-  // GitHub Pages specific stuff
-  paths: {
-    base: dev ? '' : '/rettetdemdativ.github.io'
-  },
-  appDir: 'app_'
+    // GitHub Pages specific stuff
+    paths: {
+      base: dev ? '' : '/rettetdemdativ.github.io'
+    },
+    appDir: 'app_'
+  }
 };
 
 export default config;
