@@ -1,5 +1,3 @@
-module.exports = {
-  plugins: {
+export const plugins = {
     autoprefixer: {}
-  }
-}
+};
