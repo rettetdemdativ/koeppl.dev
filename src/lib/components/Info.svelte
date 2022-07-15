@@ -4,7 +4,7 @@
 </script>
 
 <div class="info">
-  <img id="profile_pic" alt="profile pic" src="/src/assets/rettetdemdativ.png" />
+  <img id="profile_pic" alt="profile pic" src="src/assets/rettetdemdativ.png" />
   <h1>{title}</h1>
   <h3>{description}</h3>
 </div>
