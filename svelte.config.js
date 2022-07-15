@@ -26,7 +26,8 @@ const config = {
   // GitHub Pages specific stuff
   paths: {
     base: dev ? '' : '/rettetdemdativ.github.io'
-  }
+  },
+  appDir: 'app_'
 };
 
 export default config;
