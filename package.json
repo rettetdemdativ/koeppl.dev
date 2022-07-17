@@ -2,7 +2,7 @@
   "name": "koeppldev",
   "version": "0.0.1",
   "scripts": {
-    "dev": "vite dev",
+    "dev": "VITE_ENV=development vite dev",
     "build": "npm run build-dev",
     "build-dev": "VITE_ENV=development vite build",
     "build-prod": "vite build",
