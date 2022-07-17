@@ -40,7 +40,7 @@
    * @param e The KeyboardEvent instance that was emitted
    */
   function handleEnter(e: KeyboardEvent): void {
-    const command = getCurrentLine().substr(prompt.length).trimRight();
+    const command = getCurrentLine().substring(prompt.length).trimEnd()
     handleCommand(command);
     e.preventDefault();
   }
@@ -56,8 +56,8 @@
     // the length of the prompt on the line (which would mean that our
     // prompt wouldn't show), we don't allow the user to delete the
     // rest.
-    if (currentLine.substr(0, currentLine.length - 1).length >= prompt.length) {
-      termText = termText.substr(0, termText.length);
+    if (currentLine.substring(0, currentLine.length - 1).length >= prompt.length) {
+      termText = termText.substring(0, termText.length)
     } else {
       e.preventDefault();
     }
