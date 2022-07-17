@@ -1,12 +1,13 @@
 <script lang="ts">
   import { afterUpdate, onMount } from 'svelte';
-  import Tooltip, { Wrapper } from '@smui/tooltip';
+  import { blur } from 'svelte/transition';
   import GitHubApi from '../functions/github';
   import StackExchangeApi from '../functions/stackexchange';
   import { COMMAND_TEXTS } from '../constants/texts';
   import { LINKS } from '../constants/links';
 
   let terminalTextArea: HTMLTextAreaElement;
+  let showToolTip = false;
   let toolTip = "Type 'help' to see what you can do";
   let prompt = 'guest@koeppl.dev:~ ';
   let termText = '';
@@ -34,13 +35,21 @@
     }
   }
 
+  function handleTextAreaMouseEnter(event: MouseEvent) {
+    showToolTip = true;
+  }
+
+  function handleTextAreaMouseLeave(event: MouseEvent) {
+    showToolTip = false;
+  }
+
   /**
    * Handles the ENTER keydown event by passing the input on to the
    * {@link handlecommand} function.
    * @param e The KeyboardEvent instance that was emitted
    */
   function handleEnter(e: KeyboardEvent): void {
-    const command = getCurrentLine().substring(prompt.length).trimEnd()
+    const command = getCurrentLine().substring(prompt.length).trimEnd();
     handleCommand(command);
     e.preventDefault();
   }
@@ -57,7 +66,7 @@
     // prompt wouldn't show), we don't allow the user to delete the
     // rest.
     if (currentLine.substring(0, currentLine.length - 1).length >= prompt.length) {
-      termText = termText.substring(0, termText.length)
+      termText = termText.substring(0, termText.length);
     } else {
       e.preventDefault();
     }
@@ -175,33 +184,44 @@
 </script>
 
 <div id="terminal">
-  <Wrapper>
-    <textarea
-      id="term_input"
-      bind:this={terminalTextArea}
-      bind:value={termText}
-      on:keydown={handleTextAreaKeyDown}
-      spellcheck="false"
-    />
-    <Tooltip>
-      {toolTip}
-    </Tooltip>
-  </Wrapper>
+  <div id="tooltip_container">
+    {#if showToolTip}
+      <p class="transition-item" transition:blur>
+        {toolTip}
+      </p>
+    {/if}
+  </div>
+  <textarea
+    id="term_input"
+    bind:this={terminalTextArea}
+    bind:value={termText}
+    on:keydown={handleTextAreaKeyDown}
+    on:mouseenter={handleTextAreaMouseEnter}
+    on:mouseleave={handleTextAreaMouseLeave}
+    spellcheck="false"
+  />
 </div>
 
 <style lang="scss">
   @import url('https://fonts.googleapis.com/css?family=Inconsolata');
   #terminal {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    gap: 2%;
     width: 100%;
     height: 100%;
     position: relative;
     align-items: stretch;
     overflow: hidden;
   }
+
+  #tooltip_container {
+    height: 20px;
+    flex: 5;
+  }
+
   #term_input {
-    flex: 1 1 auto;
+    flex: 95;
     padding: 0px;
     margin: 0px;
     overflow: auto;

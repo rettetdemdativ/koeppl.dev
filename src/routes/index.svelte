@@ -5,10 +5,10 @@
 
 <div id="app">
   <div class="box">
-    <div class="row content">
+    <div id="info_container" class="row content">
       <Info />
     </div>
-    <div class="row content">
+    <div id="terminal_container" class="row content">
       <Terminal />
     </div>
     <div class="row footer" />
@@ -31,8 +31,15 @@
     width: 100%;
   }
   .box .row.content {
-    flex: 1 1 auto;
     overflow: auto;
     height: 100%;
+  }
+
+  #info_container {
+    flex: 45;
+  }
+
+  #terminal_container {
+    flex: 55;
   }
 </style>
