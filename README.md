@@ -8,12 +8,6 @@
 npm install
 ```
 
-### Prepare (creates SMUI styles)
-
-```
-npm run prepare
-```
-
 ### Compiles and hot-reloads for development
 
 ```
