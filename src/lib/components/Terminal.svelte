@@ -183,14 +183,14 @@
   }
 </script>
 
+<div id="tooltip_container">
+  {#if showToolTip}
+    <p class="transition-item" transition:blur>
+      {toolTip}
+    </p>
+  {/if}
+</div>
 <div id="terminal">
-  <div id="tooltip_container">
-    {#if showToolTip}
-      <p class="transition-item" transition:blur>
-        {toolTip}
-      </p>
-    {/if}
-  </div>
   <textarea
     id="term_input"
     bind:this={terminalTextArea}
@@ -216,13 +216,13 @@
   }
 
   #tooltip_container {
-    height: 20px;
+    overflow: auto;
+    height: 40px;
     flex: 5;
   }
 
   #term_input {
     flex: 95;
-    padding: 0px;
     margin: 0px;
     overflow: auto;
     background: black;
