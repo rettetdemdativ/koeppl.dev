@@ -30,14 +30,15 @@
     width: 100%;
   }
   .box .row.content {
+    overflow: hidden;
     height: 100%;
   }
 
   #info_container {
-    flex: 15;
+    flex: 45;
   }
 
   #terminal_container {
-    flex: 85;
+    flex: 55;
   }
 </style>

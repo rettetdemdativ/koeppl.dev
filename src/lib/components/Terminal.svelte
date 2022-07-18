@@ -216,7 +216,7 @@
   }
 
   #tooltip_container {
-    overflow: auto;
+    overflow: hidden;
     height: 40px;
     flex: 5;
   }
