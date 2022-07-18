@@ -202,7 +202,7 @@
   />
 </div>
 
-<style lang="scss">
+<style>
   @import url('https://fonts.googleapis.com/css?family=Inconsolata');
   #terminal {
     display: flex;
