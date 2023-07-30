@@ -185,7 +185,7 @@
 
 <div id="tooltip_container">
   {#if showToolTip}
-    <p class="transition-item" transition:blur>
+    <p class="transition-item" transition:blur|global>
       {toolTip}
     </p>
   {/if}
