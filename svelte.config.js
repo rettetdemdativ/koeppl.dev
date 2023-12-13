@@ -13,8 +13,9 @@ const config = {
     adapter: adapter({
       pages: 'build',
       assets: 'build',
-      fallback: null,
-      precompress: false
+      fallback: undefined,
+      precompress: false,
+      strict: true
     }),
 
     // GitHub Pages specific stuff
